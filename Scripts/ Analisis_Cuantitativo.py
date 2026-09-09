@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import os
 
 # ==========================================
 # 1. Carga y limpieza de datos (Temperatura)
@@ -68,3 +69,19 @@ correlacion = df_merged['Jan'].corr(df_merged['Trend'])
 
 print("\n--- Pregunta 1.3.4 ---")
 print(f"Correlación de Pearson (Enero vs Tendencia CO2): {correlacion:.4f}")
+
+# ==========================================
+# Exportación de Tablas de Frecuencia
+# ==========================================
+# Crear carpeta destino usando ruta relativa
+carpeta_destino = "../Graficos_Taller5B"
+os.makedirs(carpeta_destino, exist_ok=True)
+
+# Guardar las tablas de frecuencia como CSV para los anexos de la consultoría
+freq_51_80.to_csv(os.path.join(carpeta_destino, "frecuencias_1951_1980.csv"), 
+                  header=["Frecuencia"], index_label="Rango_Temperatura")
+
+freq_81_10.to_csv(os.path.join(carpeta_destino, "frecuencias_1981_2010.csv"), 
+                  header=["Frecuencia"], index_label="Rango_Temperatura")
+
+print("\n¡Tablas de frecuencia exportadas exitosamente a CSV!")
