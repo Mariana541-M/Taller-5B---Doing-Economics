@@ -279,4 +279,21 @@ ggsave(s, filename="Anomalias_Emisiones_Diciembre.png", path=carpeta_destino)
 correlacion_dec = df_temp_co2[["Dec", "Trend"]].corr(method="pearson")
 print(correlacion_dec)
 
+#Gráfica niveles CO2 anuales
+
+base_plot = ggplot(df_temp_co2) + scale_x_continuous(format="d")
+plot_p = (
+    base_plot
+    + geom_line(aes(x="Year", y="J-D"), size=1)
+    + labs(title="J-D temperature anomalies")
+)
+plot_q = (
+    base_plot
+    + geom_line(aes(x="Year", y="Trend"), size=1)
+    + labs(title="Carbon dioxide emissions")
+)
+m=gggrid([plot_p, plot_q], ncol=2)
+ggsave(m, filename="Anomalias_Emisiones_Anuales.png", path=carpeta_destino)
+
+
 
